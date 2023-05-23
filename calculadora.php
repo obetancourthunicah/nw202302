@@ -15,6 +15,56 @@ if (isset($_POST["btnAdd"])) {
     $resultado = $numero1 - $numero2;
     $operacion = 'resta';
 }
+// Estructura
+$switchDemo = 'A';
+switch ($switchDemo) {
+    case 'Z':
+        error_log("Z Value");
+        break;
+    case 'Y':
+        error_log("Y Value");
+        break;
+    default:
+        error_log("No Matching case");
+}
+/* Parchar  ==  Diseño pobre y poco analisis
+if (a) {
+    if (b) {
+        if (c) {
+            if (d) {
+
+            }
+        }
+    }
+}
+*/
+
+$arrColores = array("azul","verde","rojo","amarillo");
+
+error_log($arrColores[0]);
+
+$arrAssocPersona = array(
+    "nombre" => "Orlando",
+    "apellido" => "Betancourth",
+    "edad" => 99,
+    "activo" => true
+);
+
+error_log(sprintf("%s - %s", $arrAssocPersona["nombre"], $arrAssocPersona["apellido"]));
+
+$tablPersonas = array();
+$tablPersonas[] = $arrAssocPersona;
+$tablPersonas[] = $arrAssocPersona;
+
+// NO USAR ESTO;
+for ($i = 0; $i< count($tablPersonas); $i++){
+    error_log($tablPersonas[$i]);
+}
+
+foreach ($tablPersonas as $persona) {
+    error_log($persona["nombre"]);
+}
+
 
 
 
