@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $arrBebidasCaliente = array(
     "0001" => array(
         "sku" => "0001",
@@ -54,9 +56,22 @@ function generarComboBox($arrayToProcess, $valueField, $textField, $selectedValu
 // Identificando se se hizo un post
 $bebidasSelectedSku='0002';
 $resposteriaSelectedSku='R003';
+
+$orden = array();
+
 if (isset($_POST["btnOrdenar"])){
     $bebidasSelectedSku=$_POST["bebidasSelectedSku"];
     $resposteriaSelectedSku=$_POST["reposteriaSelectedSku"];
+    $orden["bebida"] = $arrBebidasCaliente[$bebidasSelectedSku];
+    $orden["reposteria"] = $arrReposteria[$resposteriaSelectedSku];
+    $orden["total"] = $orden["bebida"]["precio"] + $orden["reposteria"]["precio"];
+    $ordenes = array();
+    if(isset($_SESSION["ordenes"])){
+        $ordenes = $_SESSION["ordenes"];
+    }
+    $ordenes[]=$orden;
+    $_SESSION["ordenes"] = $ordenes;
+
 }
 ?>
 <!DOCTYPE html>
@@ -80,6 +95,11 @@ if (isset($_POST["btnOrdenar"])){
         <br>
         <button type="submit" name="btnOrdenar">Ordenar</button>
     </form>
+    <div>
+        <?php print_r($orden); ?>
+        <br>
+        <?php echo json_encode($orden, JSON_PRETTY_PRINT, 4); ?>
+    </div>
 </body>
 
 </html>
