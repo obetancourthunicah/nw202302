@@ -65,6 +65,8 @@ if (isset($_POST["btnOrdenar"])){
     $orden["bebida"] = $arrBebidasCaliente[$bebidasSelectedSku];
     $orden["reposteria"] = $arrReposteria[$resposteriaSelectedSku];
     $orden["total"] = $orden["bebida"]["precio"] + $orden["reposteria"]["precio"];
+
+
     $ordenes = array();
     if(isset($_SESSION["ordenes"])){
         $ordenes = $_SESSION["ordenes"];
