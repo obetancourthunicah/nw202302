@@ -15,12 +15,14 @@ interface IPayrollNode
     public function __construct(IPayrollNode $nextNode);
 }
 
-class SalaryToPay implements IPayrollNode
+abstract class ChainNode implements IPayrollNode
 {
-    private IPayrollNode $next;
-    public function __construct(IPayrollNode $nextNode)
+    protected ?IPayrollNode $next = null;
+    public function __construct(?IPayrollNode $nextNode = null)
     {
-        $this->next = $nextNode;
+        if ($nextNode) {
+            $this->next = $nextNode;
+        }
     }
     public function process(float $value):float
     {
@@ -31,22 +33,36 @@ class SalaryToPay implements IPayrollNode
     }
 }
 
-class CommissionsToPay implements IPayrollNode
+class SalaryToPay extends ChainNode
+{}
+
+class CommissionsToPay extends ChainNode
 {
-    private ?IPayrollNode $next;
-    public function __construct(?IPayrollNode $nextNode = null)
-    {
-        $this->next = $nextNode;
-    }
     public function process(float $value):float
     {
         // Ir a la DB y ver si hay comisiones
         $newValue = $value * 1.10;
-        if ($this->next) {
-            return $this->next->process($newValue);
-        }
-        return $newValue;
+        return parent::process($newValue);
     }
 }
 
+class IHSSToPay extends ChainNode
+{
+    public function process(float $value):float
+    {
+        // Ir a la DB y ver si hay comisiones
+        $newValue = $value * 0.9;
+        return parent::process($newValue);
+    }
+}
+
+class RapToPay extends ChainNode
+{
+    public function process(float $value):float
+    {
+        // Ir a la DB y ver si hay comisiones
+        $newValue = $value * 0.985;
+        return parent::process($newValue);
+    }
+}
 ?>
