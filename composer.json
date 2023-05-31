@@ -1,0 +1,8 @@
+{
+    "require": {
+        "twbs/bootstrap": "^5.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9"
+    }
+}
