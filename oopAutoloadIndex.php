@@ -1,12 +1,17 @@
 <?php
-require_once 'vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
-class Implementation{
-    private \NW\Controllers\Entity $var1;
-    private \NW\Dao\Entity $var2;
+use \NW\Dao\Conn;
 
-    
 
+
+class Implementation
+{
+    public function run():void
+    {
+        Conn::getConn();
+    }
 }
 
-?>
+$imp = new Implementation();
+$imp->run();

@@ -1,4 +1,7 @@
 {
+    "autoload" : {
+      "psr-0": {"":"./"}
+    },
     "require": {
         "twbs/bootstrap": "^5.3"
     },
