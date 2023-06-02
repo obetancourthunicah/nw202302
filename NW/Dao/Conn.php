@@ -17,7 +17,8 @@ class Conn
     public static function getConn()
     {
         if (self::$conn == null) {
-            self::$conn = new \PDO('sqlite::memory:');
+            //self::$conn = new \PDO('sqlite::memory:');
+            self::$conn = new \PDO('sqlite:db_demo.db');
         }
         return self::$conn;
     }
